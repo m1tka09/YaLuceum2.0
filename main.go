@@ -1,36 +1,22 @@
 package main
 
 import (
-	// "fmt"
-	"sort"
+	"fmt"
 )
 
-func Permutations(input string) []string {
-	var result []string
-	var backtrack func(start int)
-	runes := []rune(input)
-
-	backtrack = func(start int) {
-		if start == len(runes) {
-			result = append(result, string(runes))
-			return
-		}
-
-		seen := make(map[rune]bool)
-		for i := start; i < len(runes); i++ {
-			if seen[runes[i]] {
-				continue
-			}
-			seen[runes[i]] = true
-
-			runes[start], runes[i] = runes[i], runes[start]
-			backtrack(start + 1)
-			runes[start], runes[i] = runes[i], runes[start]
-		}
+func fibonacci(n int) int {
+	if n <= 1 {
+		return n
 	}
+	return fibonacci(n-1) + fibonacci(n-2)
+}
 
-	backtrack(0)
-	sort.Strings(result)
+func main() {
+	var num int
+	fmt.Print("Введите число: ")
+	fmt.Scan(&num)
 
-	return result
+	for i := num; i < num+10; i++ {
+		fmt.Println(fibonacci(i))
+	}
 }
