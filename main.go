@@ -1,22 +1,25 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func fibonacci(n int) int {
-	if n <= 1 {
-		return n
+func Calc(expression string) (float64, error) {
+	// pa := expression[0] //получение первого символа
+	// pb := expression[len(expression)-1]
+	// az := expression[len(expression)-2]
+	// if az != "*" || az != "/" || az != "+" || az != "-" { // обработка случая, если а-двузначное
+	// 	pa = expression[1] // обработка случая, если а-двузначное
+	// }
+	// return
+
+	for i, c := 0, len(expression); i < c; i++ {
+		x := expression[i]
+		if x == "+" {
+
+		}
 	}
-	return fibonacci(n-1) + fibonacci(n-2)
 }
 
 func main() {
-	var num int
-	fmt.Print("Введите число: ")
-	fmt.Scan(&num)
-
-	for i := num; i < num+10; i++ {
-		fmt.Println(fibonacci(i))
-	}
+	var expression float64
+	fmt.Scanln(&expression)
 }

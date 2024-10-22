@@ -3972,3 +3972,150 @@ package main
 // и сообщение
 // Unknown error 
 // как исправить ошибку, не изменяя функцию DeleteVowels
+
+// // Реализовать функцию  - строка-выражение состоящее из односимвольных
+// // идентификаторов и знаков арифметических действий Входящие данные -
+// // цифры(рациональные), операции +, -, *, /, операции приоритезации ( и )
+// // В случае ошибки записи выражения функция выдает ошибку
+
+// package main
+
+// import (
+// 	"errors"
+// )
+
+// func Calc(expression string) (float64, error) {
+// 	var a, b float64
+// 	switch {
+// 	case a + b:
+// 		return a + b, nil
+// 	case a - b:
+// 		return a - b, nil
+// 	case b - a:
+// 		return b - a, nil
+// 	case a * b:
+// 		return a * b, nil
+// 	case a / b:
+// 		if b > 0 || b < 0 {
+// 			return a / b, nil
+// 		} else {
+// 			err := errors.New("Division by 0 is not allowed")
+// 			return 0, err
+// 		}
+// 	case b / a:
+// 		if a > 0 || a < 0 {
+// 			return a / b
+// 		} else {
+// 			err := errors.New("Division by 0 is not allowed")
+// 			return err
+// 				}
+// 	}
+// 	return expression
+// }
+
+// func main() {
+
+// }
+
+
+// package main
+
+// import (
+// 	"fmt"
+// 	"strconv"
+// 	"strings"
+// )
+
+// func Calc(expression string) (float64, error) {
+// 	expression = strings.ReplaceAll(expression, " ", "") // удаляем пробелы из выражения
+
+// 	result, err := evaluateExpression(expression)
+// 	if err != nil {
+// 		return 0, err
+// 	}
+
+// 	return result, nil
+// }
+
+// func evaluateExpression(expression string) (float64, error) {
+// 	tokens := tokenize(expression)
+
+// 	// Проверяем наличие скобок в выражении
+// 	for _, token := range tokens {
+// 		if token == "(" || token == ")" {
+// 			return 0, fmt.Errorf("некорректное выражение, скобки не согласованы")
+// 		}
+// 	}
+
+// 	// Вычисляем выражение без скобок
+// 	result, err := evaluateTokens(tokens)
+// 	if err != nil {
+// 		return 0, err
+// 	}
+
+// 	return result, nil
+// }
+
+// func tokenize(expression string) []string {
+// 	var tokens []string
+// 	token := ""
+
+// 	for _, char := range expression {
+// 		if char == '+' || char == '-' || char == '*' || char == '/' || char == '(' || char == ')' {
+// 			if token != "" {
+// 				tokens = append(tokens, token)
+// 			}
+// 			tokens = append(tokens, string(char))
+// 			token = ""
+// 		} else {
+// 			token += string(char)
+// 		}
+// 	}
+
+// 	if token != "" {
+// 		tokens = append(tokens, token)
+// 	}
+
+// 	return tokens
+// }
+
+// func evaluateTokens(tokens []string) (float64, error) {
+// 	var stack []string
+
+// 	for _, token := range tokens {
+// 		if token == ")" {
+// 			expression := ""
+// 			for len(stack) > 0 && stack[len(stack)-1] != "(" {
+// 				expression, stack = stack[len(stack)-1]+expression, stack[:len(stack)-1]
+// 			}
+// 			if len(stack) == 0 {
+// 				return 0, fmt.Errorf("некорректное выражение, скобки не согласованы")
+// 			}
+// 			stack = stack[:len(stack)-1] // удаляем "(" из стека
+// 			result, err := evaluateExpression(expression)
+// 			if err != nil {
+// 				return 0, err
+// 			}
+// 			stack = append(stack, strconv.FormatFloat(result, 'f', -1, 64))
+// 		} else {
+// 			stack = append(stack, token)
+// 		}
+// 	}
+
+// 	result, err := strconv.ParseFloat(stack[0], 64)
+// 	if err != nil {
+// 		return 0, fmt.Errorf("некорректное выражение")
+// 	}
+
+// 	return result, nil
+// }
+
+// // func main() {
+// // 	expression := "2 * (3 + 4) / 5"
+// // 	result, err := Calc(expression)
+// // 	if err != nil {
+// // 		fmt.Println("Ошибка:", err)
+// // 	} else {
+// // 		fmt.Println("Результат выражения", expression, ":", result)
+// // 	}
+// // }
